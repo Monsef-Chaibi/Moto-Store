@@ -22,3 +22,11 @@ Route::get('/', function () {
 
 Route::match(['get', 'post'], '/Product', [FrontEnd::class, 'Product'])->name('Register');
 
+Route::match(['get', 'post'], '/Blog', [FrontEnd::class, 'Blog'])->name('Blog');
+
+Route::match(['get', 'post'], '/Blog-Detail', [FrontEnd::class, 'Blog_Detail'])->name('Blog-Detail');
+
+Route::match(['get', 'post'], '/About', [FrontEnd::class, 'About'])->name('About');
+
+Route::match(['get', 'post'], '/Contact', [FrontEnd::class, 'Contact'])->name('Contact');
+
