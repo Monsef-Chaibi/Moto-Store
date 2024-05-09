@@ -23,4 +23,10 @@ class FrontEnd extends Controller
     public function Contact(){
         return view('FrontEnd.Contact');
     }
+    public function Login(){
+        return view('FrontEnd.Auth.Login');
+    }
+    public function Register(){
+        return view('FrontEnd.Auth.Register');
+    }
 }

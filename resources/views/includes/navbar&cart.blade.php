@@ -14,9 +14,19 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
+						@auth
+                            <a href="{{ route('logout') }}"  class="flex-c-m trans-04 p-lr-25">
+                                Logout
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="flex-c-m trans-04 p-lr-25">
+                                Login
+                            </a>
+                            <a href="{{ route('Register') }}" class="flex-c-m trans-04 p-lr-25">
+                                 Register
+                            </a>
+                        @endauth
+
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
@@ -124,9 +134,17 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
-						</a>
+						@auth
+                        <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="flex-c-m p-lr-10 trans-04">Logout</button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="flex-c-m p-lr-10 trans-04">
+                                Login / Register
+                            </a>
+                        @endauth
+
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							EN

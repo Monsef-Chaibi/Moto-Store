@@ -16,3 +16,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('TemplateFile/css/util.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('TemplateFile/css/main.css') }}">
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
+<script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
+

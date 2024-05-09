@@ -103,3 +103,24 @@
 		});
 	</script>
 <!--===============================================================================================-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check for success message
+        @if(session('success'))
+            iziToast.success({
+                title: 'Success',
+                message: '{{ session('success') }}',
+                position: 'topLeft'
+            });
+        @endif
+
+        // Check for error message
+        @if(session('error'))
+            iziToast.error({
+                title: 'Error',
+                message: '{{ session('error') }}',
+                position: 'topLeft'
+            });
+        @endif
+    });
+</script>

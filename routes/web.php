@@ -30,3 +30,7 @@ Route::match(['get', 'post'], '/About', [FrontEnd::class, 'About'])->name('About
 
 Route::match(['get', 'post'], '/Contact', [FrontEnd::class, 'Contact'])->name('Contact');
 
+Route::match(['get', 'post'], '/login', [FrontEnd::class, 'Login'])->name('login');
+
+Route::match(['get', 'post'], '/Register', [FrontEnd::class, 'Register'])->name('Register');
+
