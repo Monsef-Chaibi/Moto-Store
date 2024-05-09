@@ -60,8 +60,14 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            session()->flash('success', 'Successfully logged in!');
-            return redirect('/');
+            // Check if logged in user is an admin
+            if (Auth::user()->is_admin) {
+                session()->flash('success', 'Welcome back, Admin!');
+                return redirect('/');  // Redirect to the admin dashboard
+            } else {
+                session()->flash('success', 'Successfully logged in!');
+                return redirect('/');  // Redirect to the regular user homepage
+            }
         }
 
         session()->flash('error', 'The provided credentials do not match our records.');
@@ -88,25 +94,47 @@ class AuthController extends Controller
         try {
             $user = Socialite::driver('google')->user();
 
-            // Find existing user or create a new one
-            $finduser = User::where('google_id', $user->id)->first();
-            if ($finduser) {
-                Auth::login($finduser);
+            // Check if email already exists
+            $existingUser = User::where('email', $user->email)->first();
+
+            if ($existingUser) {
+                // If google_id is not set, update it
+                if (empty($existingUser->google_id)) {
+                    $existingUser->update([
+                        'google_id' => $user->id,
+                        'name' => $user->name,  // Optionally update other fields
+                    ]);
+                }
+
+                // Login the user
+                Auth::login($existingUser);
+
+                // Check if user is an admin
+                if (Auth::user()->is_admin) {
+                    session()->flash('success', 'Welcome back, Admin!');
+                    return redirect('/');  // Redirect to admin dashboard
+                } else {
+                    session()->flash('success', 'Successfully logged in!');
+                    return redirect('/');  // Redirect to homepage
+                }
             } else {
+                // Create a new user
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
-                    'google_id'=> $user->id,
-                    'password' => encrypt('google')  // You can generate random string
+                    'google_id' => $user->id,
+                    'password' => encrypt('google')  // Use a secure random password
                 ]);
                 Auth::login($newUser);
+                session()->flash('success', 'Successfully registered and logged in!');
+                return redirect('/');  // Redirect to homepage
             }
-
-            return redirect('/'); // Redirect to the intended page
         } catch (Exception $e) {
-            dd($e->getMessage());
-            return redirect('login')->withError($e->getMessage());
+            session()->flash('error', 'There was a problem logging in with Google.');
+            return redirect('login')->withErrors(['error' => $e->getMessage()]);
         }
     }
+
+
 }
 

@@ -110,7 +110,7 @@
             iziToast.success({
                 title: 'Success',
                 message: '{{ session('success') }}',
-                position: 'topLeft'
+                position: 'topRight'
             });
         @endif
 
@@ -119,7 +119,7 @@
             iziToast.error({
                 title: 'Error',
                 message: '{{ session('error') }}',
-                position: 'topLeft'
+                position: 'topRight'
             });
         @endif
     });

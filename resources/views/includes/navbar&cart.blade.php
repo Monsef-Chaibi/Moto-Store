@@ -13,7 +13,11 @@
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
 						</a>
-
+                        @if(auth()->user() && auth()->user()->is_admin)
+                            <a href="{{ route('Dash') }}"  class="flex-c-m trans-04 p-lr-25">
+                                Admin Dashboard
+                            </a>
+                        @endif
 						@auth
                             <a href="{{ route('logout') }}"  class="flex-c-m trans-04 p-lr-25">
                                 Logout
@@ -133,18 +137,23 @@
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							Help & FAQs
 						</a>
-
-						@auth
-                        <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="flex-c-m p-lr-10 trans-04">Logout</button>
-                            </form>
+                        @if(auth()->user() && auth()->user()->is_admin)
+                            <a href="{{ route('Dash') }}"  class="flex-c-m p-lr-10 trans-04">
+                                Admin Dashboard
+                            </a>
+                        @endif
+                        @auth
+                        <a href="{{ route('logout') }}"  class="flex-c-m p-lr-10 trans-04">
+                            Logout
+                            </a>
                         @else
                             <a href="{{ route('login') }}" class="flex-c-m p-lr-10 trans-04">
-                                Login / Register
+                                Login
+                            </a>
+                            <a href="{{ route('Register') }}" class="flex-c-m p-lr-10 trans-04">
+                                Register
                             </a>
                         @endauth
-
 
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							EN
