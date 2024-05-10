@@ -1,7 +1,4 @@
-<nav
-class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-id="layout-navbar"
->
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
 <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
   <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
     <i class="bx bx-menu bx-sm"></i>
@@ -25,7 +22,7 @@ id="layout-navbar"
 
   <ul class="navbar-nav flex-row align-items-center ms-auto">
     <!-- Place this tag where you want the button to render. -->
-   
+
     <!-- User -->
     <li class="nav-item navbar-dropdown dropdown-user dropdown">
       <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -88,3 +85,6 @@ id="layout-navbar"
   </ul>
 </div>
 </nav>
+
+
+

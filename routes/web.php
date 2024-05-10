@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontEnd;
+use App\Http\Controllers\TranslationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +35,4 @@ Route::match(['get', 'post'], '/login', [FrontEnd::class, 'Login'])->name('login
 
 Route::match(['get', 'post'], '/Register', [FrontEnd::class, 'Register'])->name('Register');
 
+Route::post('/translate', [TranslationController::class, 'translate'])->name('translate');
