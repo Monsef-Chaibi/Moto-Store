@@ -44,17 +44,16 @@
 
               <!-- Basic Bootstrap Table -->
               <div class="card">
-                <div class="p-2 flex justify-between w-full">
+                <div class="p-4 flex justify-between w-full">
                     <div>
-                        <input type="text" name="" id="" placeholder="Search" class="p-2 border-1 border-gray-300 rounded">
+                        <input type="text" id="searchInput" placeholder="Search" class="p-2 border-1 border-gray-300 rounded">
                     </div>
                     <div class="flex">
                         <select id="defaultSelect" class="form-select w-20 mr-4">
-                            <option>7</option>
-                            <option value="1">10</option>
-                            <option value="2">25</option>
-                            <option value="2">50</option>
-                            <option value="3">100</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
                         </select>
                         <a href="javascript:void(0)" class="btn btn-primary" onclick="openSidebar()">+ Add Category</a>
                     </div>
@@ -63,65 +62,14 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>Project</th>
-                        <th>Client</th>
-                        <th>Users</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th>Name In English</th>
+                        <th>Name In French</th>
+                        <th>Total Products</th>
+                        <th>Total Earning</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular Project</strong></td>
-                        <td>Albert Cook</td>
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Lilian Fuller"
-                            >
-                              <img src="../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Sophia Wilkerson"
-                            >
-                              <img src="../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Christina Parker"
-                            >
-                              <img src="../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                          </ul>
-                        </td>
-                        <td><span class="badge bg-label-primary me-1">Active</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
+                    <tbody id="categoryTableBody">
                     </tbody>
                   </table>
                 </div>
@@ -141,7 +89,7 @@
                 </button>
             </div>
             <!-- Form content -->
-            <form class="px-4" method="POST" action="{{ route('categories.store') }}">
+            <form class="px-4" method="POST" id="saveCategoryForm">
                 @csrf
                 <label for="NameInEnglish" class="form-label">Name In English</label>
                 <input
@@ -169,68 +117,56 @@
         <!-- Overlay -->
         <div id="overlay" class="hidden fixed inset-0 bg-gray-200 bg-opacity-30 z-30"></div>
 
+        @include('FrontEnd.AdminDash.FrontEnd.Include.Script')
 
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="{{ asset('AdminDash/vendor/libs/jquery/jquery.js')}}"></script>
-    <script src="{{ asset('AdminDash/vendor/libs/popper/popper.js')}}"></script>
-    <script src="{{ asset('AdminDash/vendor/js/bootstrap.js')}}"></script>
-    <script src="{{ asset('AdminDash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
+         <!-- Modal -->
+         <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalCenterTitle">Edit Category</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="nameWithTitle" class="form-label">Name In English</label>
+                      <input
+                        type="text"
+                        id="nameWithEn"
+                        class="form-control"
+                        placeholder="Enter Name"
+                      />
+                    </div>
+                  </div>
+                  <div class="row g-2">
+                    <div class="col mb-0">
+                      <label for="emailWithTitle" class="form-label">Name In Frensh</label>
+                      <input
+                        type="text"
+                        id="nameWithFr"
+                        class="form-control"
+                        placeholder="xxxx@xxx.xx"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="categoryId" value="">
+                <div class="modal-footer">
+                  <button type="button" id="closeModalButton"class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary" id="saveChangesBtn" onclick="saveCategoryChanges()">Save changes</button>
 
-    <script src="{{ asset('AdminDash/vendor/js/menu.js')}}"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="{{ asset('AdminDash/vendor/libs/apex-charts/apexcharts.js')}}"></script>
-
-    <!-- Main JS -->
-    <script src="{{ asset('AdminDash/js/main.js')}}"></script>
-
-    <!-- Page JS -->
-    <script src="{{ asset('AdminDash/js/dashboards-analytics.js')}}"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js')}}"></script>
+                </div>
+              </div>
+            </div>
+          </div>
   </body>
 </html>
-<script>
-function openSidebar() {
-    document.getElementById("mySidebar").style.transform = "translateX(0%)";
-    document.getElementById("overlay").classList.remove("hidden");
-    document.getElementById("layout-navbar").style.zIndex = "0";
-}
-
-function closeSidebar() {
-    document.getElementById("mySidebar").style.transform = "translateX(100%)";
-    document.getElementById("overlay").classList.add("hidden");
-    document.getElementById("layout-navbar").style.zIndex = "1075";
-
-}
-
-// Add click event listener to overlay to close sidebar
-document.getElementById("overlay").addEventListener('click', function() {
-    closeSidebar();
-});
-
-    function translateText() {
-        const input = document.getElementById('NameInEnglish').value;
-        fetch('/translate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ text: input, target_language: 'fr' })  // Adjust target language as needed
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById('NameInFrench').value = data.translatedText; // Consider renaming this ID to match the language
-            } else {
-                console.error('Translation failed:', data.error);
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
-    </script>
