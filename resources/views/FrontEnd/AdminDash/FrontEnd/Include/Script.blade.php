@@ -123,7 +123,6 @@
                 const row = tableBody.insertRow();
                 row.innerHTML = `
                     <td>${category.name_en}</td>
-                    <td>${category.name_fr}</td>
                     <td>${category.total_products || 0}</td>
                     <td>${category.total_earning || '0.00'}</td>
                     <td>

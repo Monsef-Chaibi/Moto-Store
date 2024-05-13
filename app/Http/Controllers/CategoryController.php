@@ -12,7 +12,6 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'NameInEnglish' => 'required|string|max:255',
-            'NameInFrench' => 'required|string|max:255',
         ]);
 
 
@@ -27,7 +26,6 @@ class CategoryController extends Controller
         try {
             $category = new Category;
             $category->name_en = $request->NameInEnglish;
-            $category->name_fr = $request->NameInFrench;
             $category->save();
 
             return response()->json([
@@ -50,7 +48,6 @@ class CategoryController extends Controller
 
         $categories = Category::query()
             ->where('name_en', 'like', '%' . $search . '%')
-            ->orWhere('name_fr', 'like', '%' . $search . '%')
             ->paginate($limit); // This automatically handles the pagination
 
         return response()->json($categories); // This will return paginated categories
@@ -77,12 +74,10 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name_en' => 'required|string|max:255',
-            'name_fr' => 'required|string|max:255',
         ]);
         try {
         $category = Category::find($id);
         $category->name_en = $request->input('name_en');
-        $category->name_fr = $request->input('name_fr');
         $category->save();
         return response()->json(['status' => 'success', 'message' => 'Category updated successfully!']);
         }
@@ -91,6 +86,9 @@ class CategoryController extends Controller
         }
     }
 
-
+    public function Product()
+    {
+        return view();
+    }
 
 }

@@ -40,7 +40,7 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Catégorie </h4>
 
               <!-- Basic Bootstrap Table -->
               <div class="card">
@@ -62,10 +62,9 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>Name In English</th>
-                        <th>Name In French</th>
-                        <th>Total Products</th>
-                        <th>Total Earning</th>
+                        <th>Nom</th>
+                        <th>Produits totaux</th>
+                        <th>Gain total</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -83,7 +82,7 @@
         <!-- Sidebar -->
         <div id="mySidebar" class="fixed right-0 top-0 w-[25rem] h-full bg-white shadow-xl  translate-x-full duration-300 ease-in-out " style="z-index: 1075 !important">
             <div class="flex justify-between m-4">
-                <h2 class="text-xl font-semibold">Add Category</h2>
+                <h2 class="text-xl font-semibold">Ajouter une catégorie</h2>
                 <button onclick="closeSidebar()" type="button" class="btn btn-icon btn-outline-primary">
                     X
                 </button>
@@ -91,22 +90,13 @@
             <!-- Form content -->
             <form class="px-4" method="POST" id="saveCategoryForm">
                 @csrf
-                <label for="NameInEnglish" class="form-label">Name In English</label>
+                <label for="NameInEnglish" class="form-label">Nom</label>
                 <input
                   type="text"
                   class="form-control mb-2"
                   name="NameInEnglish"
                   id="NameInEnglish"
                   oninput="translateText()"
-                  aria-describedby="defaultFormControlHelp"
-                />
-
-                <label for="NameInFrench" class="form-label">Name In French</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="NameInFrench"
-                  id="NameInFrench"
                   aria-describedby="defaultFormControlHelp"
                 />
                 <button type="submit" class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -125,7 +115,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="modalCenterTitle">Edit Category</h5>
+                  <h5 class="modal-title" id="modalCenterTitle">Modifier la catégorie</h5>
                   <button
                     type="button"
                     class="btn-close"
@@ -136,23 +126,12 @@
                 <div class="modal-body">
                   <div class="row">
                     <div class="col mb-3">
-                      <label for="nameWithTitle" class="form-label">Name In English</label>
+                      <label for="nameWithTitle" class="form-label">Nom</label>
                       <input
                         type="text"
                         id="nameWithEn"
                         class="form-control"
                         placeholder="Enter Name"
-                      />
-                    </div>
-                  </div>
-                  <div class="row g-2">
-                    <div class="col mb-0">
-                      <label for="emailWithTitle" class="form-label">Name In Frensh</label>
-                      <input
-                        type="text"
-                        id="nameWithFr"
-                        class="form-control"
-                        placeholder="xxxx@xxx.xx"
                       />
                     </div>
                   </div>
