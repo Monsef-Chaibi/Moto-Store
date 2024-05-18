@@ -86,9 +86,6 @@ class CategoryController extends Controller
         }
     }
 
-    public function Product()
-    {
-        return view();
-    }
+
 
 }

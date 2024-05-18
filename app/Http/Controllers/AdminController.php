@@ -12,4 +12,8 @@ class AdminController extends Controller
     public function Category(){
         return view('FrontEnd.AdminDash.FrontEnd.Category.Category');
     }
+    public function Product()
+    {
+        return view('FrontEnd.AdminDash.FrontEnd.Product.Product');
+    }
 }

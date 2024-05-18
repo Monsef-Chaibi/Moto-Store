@@ -99,14 +99,14 @@
             <div data-i18n="Analytics">Category</div>
         </a>
     </li>
-    <li class="menu-item">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
+    <li class="menu-item {{ request()->routeIs('Product') ? 'active' : '' }}">
+        <a class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-cube-alt"></i>
           <div data-i18n="Misc">Product</div>
         </a>
         <ul class="menu-sub">
             <li class="menu-item">
-                <a href="pages-misc-under-maintenance.html" class="menu-link">
+                <a  href="{{route('Product')}}"  class="menu-link">
                     <div data-i18n="Under Maintenance">Add Product</div>
                 </a>
             </li>
