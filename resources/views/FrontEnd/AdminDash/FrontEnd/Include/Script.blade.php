@@ -198,7 +198,6 @@
 
 
     function saveCategoryChanges(){
-    console.log('2wkeo');
     var categoryId = document.getElementById('categoryId').value;
     var nameEn = document.getElementById('nameWithEn').value;
     var nameFr = document.getElementById('nameWithFr').value;

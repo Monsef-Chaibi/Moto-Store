@@ -21,7 +21,23 @@
   </head>
 
   <body>
+     <script>
+        @if (session('success'))
+            iziToast.success({
+                title: 'Success',
+                message: '{{ session('success') }}',
+                position: 'topRight'
+            });
+        @endif
 
+        @if (session('error'))
+            iziToast.error({
+                title: 'Error',
+                message: '{{ session('error') }}',
+                position: 'topRight'
+            });
+        @endif
+    </script>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -50,58 +66,44 @@
                       <h5 class="mb-0">Ajouter Produit</h5>
                     </div>
                     <div class="card-body">
-                      <form>
-                        <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-default-name">Nom</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="basic-default-name" placeholder="Moto" />
-                          </div>
-                        </div>
-                        <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-default-company">Price</label>
-                          <div class="col-sm-10">
-                            <input
-                              type="number"
-                              class="form-control"
-                              id="basic-default-company"
-                              placeholder="10"
-                            />
-                          </div>
-                        </div>
-                        <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-default-email">Quantité</label>
-                          <div class="col-sm-10">
-                            <div class="input-group input-group-merge">
-                              <input
-                                type="number"
-                                id="basic-default-email"
-                                class="form-control"
-                                placeholder="8"
-                              />
+                        <form method="POST" action="{{route('StoreProduct')}}" enctype="multipart/form-data">
+                            @csrf <!-- This is important for Laravel to prevent CSRF attacks -->
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Nom</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="basic-default-name" name="name" placeholder="Moto" required />
+                                </div>
                             </div>
-                          </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="formFile" class="col-sm-2 col-form-label">Image</label>
-                          <div class="col-sm-10">
-                            <input class="form-control" type="file" id="formFile" />
-                          </div>
-                        </div>
-                        <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-default-message">description</label>
-                          <div class="col-sm-10">
-                            <textarea
-                              id="basic-default-message"
-                              class="form-control"
-                            ></textarea>
-                          </div>
-                        </div>
-                        <div class="row justify-content-end">
-                          <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Ajouter</button>
-                          </div>
-                        </div>
-                      </form>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-company">Price</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="basic-default-company" name="price" placeholder="10" required />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-email">Quantité</label>
+                                <div class="col-sm-10">
+                                    <input type="number" id="basic-default-email" class="form-control" name="quantity" placeholder="8" required />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="formFile" class="col-sm-2 col-form-label">Image</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="file" id="formFile" name="image" />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-message">Description</label>
+                                <div class="col-sm-10">
+                                    <textarea id="basic-default-message" class="form-control" name="description" required></textarea>
+                                </div>
+                            </div>
+                            <div class="row justify-content-end">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                   </div>
                 </div>

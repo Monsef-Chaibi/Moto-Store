@@ -16,4 +16,8 @@ class AdminController extends Controller
     {
         return view('FrontEnd.AdminDash.FrontEnd.Product.Product');
     }
+    public function ProductList()
+    {
+        return view('FrontEnd.AdminDash.FrontEnd.Product.Product_List');
+    }
 }

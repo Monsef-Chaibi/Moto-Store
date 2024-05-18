@@ -111,7 +111,7 @@
                 </a>
             </li>
             <li class="menu-item">
-                <a href="pages-misc-error.html" class="menu-link">
+                <a href="{{route('ProductList')}}" class="menu-link">
                 <div data-i18n="Error">Product List</div>
                 </a>
             </li>
