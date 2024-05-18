@@ -99,7 +99,7 @@
             <div data-i18n="Analytics">Category</div>
         </a>
     </li>
-    <li class="menu-item {{ request()->routeIs('Product') ? 'active' : '' }}">
+    <li class="menu-item {{ request()->routeIs('Product') || request()->routeIs('ProductList') ? 'active' : '' }}">
         <a class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-cube-alt"></i>
           <div data-i18n="Misc">Product</div>

@@ -54,4 +54,39 @@ class ProductController extends Controller
 
         return response()->json($products);
     }
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        return response()->json($product);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->quantity = $request->input('quantity');
+
+        if ($request->hasFile('image')) {
+            $filePath = $request->file('image')->store('public/images');
+            $product->image = str_replace('public/', '', $filePath);
+        }
+
+        $product->save();
+
+        return response()->json(['success' => true]);
+    }
+
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+
+        if ($product->delete()) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
+    }
 }

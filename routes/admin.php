@@ -18,4 +18,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/StoreProduct', [ProductController::class, 'Store'])->name('StoreProduct');
     Route::get('/Product-List', [AdminController::class, 'ProductList'])->name('ProductList');
     Route::get('/api/products', [ProductController::class, 'getProducts'])->name('ProductController');
+    Route::get('/api/products/{id}', [ProductController::class, 'show']);
+    Route::post('/products/{id}', [ProductController::class, 'update']);
+    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 });
