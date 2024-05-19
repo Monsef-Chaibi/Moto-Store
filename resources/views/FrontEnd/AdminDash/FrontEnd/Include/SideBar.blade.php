@@ -15,6 +15,7 @@
             message: '{{ session('error') }}',
             position: 'topRight'
         });
+        
     @endif
 </script>
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">

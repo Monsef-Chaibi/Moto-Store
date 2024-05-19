@@ -23,7 +23,7 @@
         overlayParentElement : 'html',
         transition: function(url){ window.location.href = url; }
     });
-    
+
     /*[ Back to top ]
     ===========================================================*/
     var windowH = $(window).height()/2;
@@ -52,26 +52,26 @@
     else {
         var posWrapHeader = 0;
     }
-    
+
 
     if($(window).scrollTop() > posWrapHeader) {
         $(headerDesktop).addClass('fix-menu-desktop');
-        $(wrapMenu).css('top',0); 
-    }  
+        $(wrapMenu).css('top',0);
+    }
     else {
         $(headerDesktop).removeClass('fix-menu-desktop');
-        $(wrapMenu).css('top',posWrapHeader - $(this).scrollTop()); 
+        $(wrapMenu).css('top',posWrapHeader - $(this).scrollTop());
     }
 
     $(window).on('scroll',function(){
         if($(this).scrollTop() > posWrapHeader) {
             $(headerDesktop).addClass('fix-menu-desktop');
-            $(wrapMenu).css('top',0); 
-        }  
+            $(wrapMenu).css('top',0);
+        }
         else {
             $(headerDesktop).removeClass('fix-menu-desktop');
-            $(wrapMenu).css('top',posWrapHeader - $(this).scrollTop()); 
-        } 
+            $(wrapMenu).css('top',posWrapHeader - $(this).scrollTop());
+        }
     });
 
 
@@ -104,7 +104,7 @@
                     $(arrowMainMenu).removeClass('turn-arrow-main-menu-m');
                 }
             });
-                
+
         }
     });
 
@@ -137,7 +137,7 @@
             var filterValue = $(this).attr('data-filter');
             $topeContainer.isotope({filter: filterValue});
         });
-        
+
     });
 
     // init Isotope
@@ -176,7 +176,7 @@
         if($('.js-show-search').hasClass('show-search')) {
             $('.js-show-search').removeClass('show-search');
             $('.panel-search').slideUp(400);
-        }    
+        }
     });
 
     $('.js-show-search').on('click',function(){
@@ -186,7 +186,7 @@
         if($('.js-show-filter').hasClass('show-filter')) {
             $('.js-show-filter').removeClass('show-filter');
             $('.panel-filter').slideUp(400);
-        }    
+        }
     });
 
 
@@ -265,17 +265,39 @@
             }
         });
     });
-    
+
     /*==================================================================
     [ Show modal1 ]*/
-    $('.js-show-modal1').on('click',function(e){
+    // Function to open modal and fetch product details
+    $('.js-show-modal1').on('click', function(e) {
         e.preventDefault();
-        $('.js-modal1').addClass('show-modal1');
+        const productId = $(this).data('productId');
+        const productImage = $(this).data('productImage'); // Access the data-product-image attribute
+
+        const modal = $('.js-modal1');
+
+        // Fetch product details
+        fetch(`/productmodal/${productId}`)
+            .then(response => response.json())
+            .then(product => {
+                // Populate modal with product details
+                modal.find('#modal-product-name').text(product.name);
+                modal.find('#modal-product-price').text(`$${product.price}`);
+                modal.find('#modal-product-description').text(product.description);
+
+                // Set image source dynamically
+                modal.find('#modal-product-image').attr('src', productImage);
+            });
+
+        // Show modal
+        modal.addClass('show-modal1');
     });
 
-    $('.js-hide-modal1').on('click',function(){
+    // Function to close modal
+    $('.js-hide-modal1').on('click', function() {
         $('.js-modal1').removeClass('show-modal1');
     });
+
 
 
 

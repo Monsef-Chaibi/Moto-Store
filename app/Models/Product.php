@@ -9,6 +9,16 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'description', 'price', 'quantity', 'image',
+        'name', 'description', 'price', 'quantity', 'image', 'category_id',
     ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'id'; // Assuming the primary key of your Product model is 'id'
+    }
+
 }

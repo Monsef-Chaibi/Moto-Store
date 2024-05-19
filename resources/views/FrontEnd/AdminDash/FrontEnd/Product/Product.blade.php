@@ -51,6 +51,17 @@
                     <div class="card-body">
                         <form method="POST" action="{{route('StoreProduct')}}" enctype="multipart/form-data">
                             @csrf <!-- This is important for Laravel to prevent CSRF attacks -->
+                            <div class="mb-3 flex">
+                                <label class="col-sm-2 col-form-label" for="Category">Categories</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" id="Category" name="category" aria-label="Default select example" required>
+                                        <option value="" class="hidden" disabled selected>Choisir une catégorie</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name_en }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                              </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Nom</label>
                                 <div class="col-sm-10">

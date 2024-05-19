@@ -92,13 +92,7 @@
             document.getElementById('NameInEnglish').value = '';
             document.getElementById('NameInFrench').value = '';
         })
-        .catch((error) => {
-            iziToast.error({
-                title: 'Error',
-                message: 'Failed to save category',
-                position: 'topRight'
-            });
-        });
+     
     });
 
 

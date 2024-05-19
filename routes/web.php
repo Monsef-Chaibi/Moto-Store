@@ -16,10 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::match(['get', 'post'], '/', [FrontEnd::class, 'Index'])->name('Index');
 
 Route::match(['get', 'post'], '/Product', [FrontEnd::class, 'Product'])->name('Register');
 
@@ -36,3 +33,5 @@ Route::match(['get', 'post'], '/login', [FrontEnd::class, 'Login'])->name('login
 Route::match(['get', 'post'], '/Register', [FrontEnd::class, 'Register'])->name('Register');
 
 Route::post('/translate', [TranslationController::class, 'translate'])->name('translate');
+
+Route::get('/productmodal/{product}', [FrontEnd::class, 'show'])->name('products.show');

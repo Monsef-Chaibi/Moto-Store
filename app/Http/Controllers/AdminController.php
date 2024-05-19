@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,7 +15,8 @@ class AdminController extends Controller
     }
     public function Product()
     {
-        return view('FrontEnd.AdminDash.FrontEnd.Product.Product');
+        $categories = Category::all();
+        return view('FrontEnd.AdminDash.FrontEnd.Product.Product')->with('categories',$categories);
     }
     public function ProductList()
     {

@@ -60,6 +60,7 @@
                             <thead>
                                 <tr>
                                     <th>Image</th>
+                                    <th>Categorie</th>
                                     <th>Nom</th>
                                     <th>Description</th>
                                     <th>Price</th>
@@ -144,8 +145,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 data.data.forEach(product => {
                     const row = document.createElement('tr');
                     const imageUrl = `{{ asset('storage') }}/${product.image}`;
+                    const categoryName = product.category ? product.category.name_en : ''; // Check if category is available
                     row.innerHTML = `
                         <td><img src="${imageUrl}" alt="${product.name}" class="rounded-circle" style="width: 50px; height: 50px;"></td>
+                        <td>${categoryName}</td>
                         <td>${product.name}</td>
                         <td>${product.description}</td>
                         <td>${product.price}</td>

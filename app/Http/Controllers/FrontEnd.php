@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class FrontEnd extends Controller
 {
     //
+
+
+    public function Index()
+    {
+        $categories = Category::all();
+        $products = Product::all(); // Fetch all products
+        return view('welcome', compact('categories', 'products'));
+    }
     public function Product(){
         return view('FrontEnd.ShopPage');
     }
@@ -28,5 +38,9 @@ class FrontEnd extends Controller
     }
     public function Register(){
         return view('FrontEnd.Auth.Register');
+    }
+    public function show(Product $product)
+    {
+        return response()->json($product);
     }
 }
