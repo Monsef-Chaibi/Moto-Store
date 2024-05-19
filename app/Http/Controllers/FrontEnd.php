@@ -14,19 +14,13 @@ class FrontEnd extends Controller
     public function Index()
     {
         $categories = Category::all();
-        $products = Product::all(); // Fetch all products
+        $products = Product::inRandomOrder()->take(16)->get(); // Fetch 16 random products
         return view('welcome', compact('categories', 'products'));
     }
     public function Product(){
-        return view('FrontEnd.ShopPage');
+        $categories = Category::all();
+        return view('FrontEnd.ShopPage')->with('categories',$categories);
     }
-    public function Blog(){
-        return view('FrontEnd.Blog.Blog');
-    }
-    public function Blog_Detail(){
-        return view('FrontEnd.Blog.Blog-detail');
-    }
-
     public function About(){
         return view('FrontEnd.About');
     }
@@ -43,4 +37,17 @@ class FrontEnd extends Controller
     {
         return response()->json($product);
     }
+    public function getProducts(Request $request)
+    {
+        $limit = $request->input('limit', 12); // Number of products to fetch
+        $offset = $request->input('offset', 0); // Offset for pagination
+
+        $products = Product::with('category')
+            ->skip($offset)
+            ->take($limit)
+            ->get();
+
+        return response()->json($products);
+    }
+
 }

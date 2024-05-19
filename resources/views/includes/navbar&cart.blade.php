@@ -75,10 +75,6 @@
 								<a href="/Product">Shop</a>
 							</li>
 
-							<li class="{{ request()->is('Blog', 'Blog-Detail') ? 'active-menu' : '' }}">
-								<a href="/Blog">Blog</a>
-							</li>
-
 							<li class="{{ request()->is('About') ? 'active-menu' : '' }}">
 								<a href="/About">About</a>
 							</li>

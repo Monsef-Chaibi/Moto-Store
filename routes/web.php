@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::match(['get', 'post'], '/', [FrontEnd::class, 'Index'])->name('Index');
 
-Route::match(['get', 'post'], '/Product', [FrontEnd::class, 'Product'])->name('Register');
+Route::match(['get', 'post'], '/Product', [FrontEnd::class, 'Product'])->name('Product');
 
 Route::match(['get', 'post'], '/Blog', [FrontEnd::class, 'Blog'])->name('Blog');
 
@@ -27,7 +27,7 @@ Route::match(['get', 'post'], '/Blog-Detail', [FrontEnd::class, 'Blog_Detail'])-
 Route::match(['get', 'post'], '/About', [FrontEnd::class, 'About'])->name('About');
 
 Route::match(['get', 'post'], '/Contact', [FrontEnd::class, 'Contact'])->name('Contact');
-
+ 
 Route::match(['get', 'post'], '/login', [FrontEnd::class, 'Login'])->name('login');
 
 Route::match(['get', 'post'], '/Register', [FrontEnd::class, 'Register'])->name('Register');
@@ -35,3 +35,5 @@ Route::match(['get', 'post'], '/Register', [FrontEnd::class, 'Register'])->name(
 Route::post('/translate', [TranslationController::class, 'translate'])->name('translate');
 
 Route::get('/productmodal/{product}', [FrontEnd::class, 'show'])->name('products.show');
+
+Route::get('/productsAll', [FrontEnd::class, 'getProducts'])->name('products.get');

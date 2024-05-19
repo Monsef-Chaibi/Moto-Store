@@ -282,13 +282,12 @@
             .then(product => {
                 // Populate modal with product details
                 modal.find('#modal-product-name').text(product.name);
-                modal.find('#modal-product-price').text(`$${product.price}`);
+                modal.find('#modal-product-price').text(`${product.price} DH`);
                 modal.find('#modal-product-description').text(product.description);
 
                 // Set image source dynamically
                 modal.find('#modal-product-image').attr('src', productImage);
             });
-
         // Show modal
         modal.addClass('show-modal1');
     });
