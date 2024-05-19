@@ -50,4 +50,18 @@ class FrontEnd extends Controller
         return response()->json($products);
     }
 
+    public function ProductDetails($id)
+    {
+        $product = Product::findOrFail($id);
+
+        // Fetch 10 random products with the same category
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->inRandomOrder()
+            ->limit(10)
+            ->get();
+
+        return view('FrontEnd.ProductDetails', compact('product', 'relatedProducts'));
+    }
+
+
 }

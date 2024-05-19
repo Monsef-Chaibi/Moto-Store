@@ -87,7 +87,7 @@
                         const productHtml = `
                             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${product.category.name_en.toLowerCase()}" >
                                 <!-- Block2 -->
-                                <a href="">
+                                <a href="/Product-Details/${product.id}">
                                     <div class="block2">
                                         <div class="block2-pic hov-img0">
                                             <img src="{{ asset('storage') }}/${product.image}" alt="${product.name}">

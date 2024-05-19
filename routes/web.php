@@ -27,10 +27,12 @@ Route::match(['get', 'post'], '/Blog-Detail', [FrontEnd::class, 'Blog_Detail'])-
 Route::match(['get', 'post'], '/About', [FrontEnd::class, 'About'])->name('About');
 
 Route::match(['get', 'post'], '/Contact', [FrontEnd::class, 'Contact'])->name('Contact');
- 
+
 Route::match(['get', 'post'], '/login', [FrontEnd::class, 'Login'])->name('login');
 
 Route::match(['get', 'post'], '/Register', [FrontEnd::class, 'Register'])->name('Register');
+
+Route::match(['get', 'post'], '/Product-Details/{id}', [FrontEnd::class, 'ProductDetails']);
 
 Route::post('/translate', [TranslationController::class, 'translate'])->name('translate');
 
