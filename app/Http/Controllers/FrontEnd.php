@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontEnd extends Controller
 {
@@ -61,6 +62,10 @@ class FrontEnd extends Controller
             ->get();
 
         return view('FrontEnd.ProductDetails', compact('product', 'relatedProducts'));
+    }
+
+    public function checkLogin() {
+        return response()->json(['loggedIn' => Auth::check()]);
     }
 
 

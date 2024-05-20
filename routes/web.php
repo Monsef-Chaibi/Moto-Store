@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FrontEnd;
 use App\Http\Controllers\TranslationController;
@@ -39,3 +40,11 @@ Route::post('/translate', [TranslationController::class, 'translate'])->name('tr
 Route::get('/productmodal/{product}', [FrontEnd::class, 'show'])->name('products.show');
 
 Route::get('/productsAll', [FrontEnd::class, 'getProducts'])->name('products.get');
+
+Route::get('/check-login', [FrontEnd::class, 'checkLogin']);
+
+Route::post('/add-to-cart', [CartController::class, 'addToCart']);
+
+Route::get('/cart-item-count', [CartController::class, 'getCartItemCount']);
+
+Route::get('/cart-items', [CartController::class, 'getCartItems']);

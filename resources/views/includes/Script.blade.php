@@ -77,13 +77,6 @@
 
 		/*---------------------------------------------*/
 
-		$('.js-addcart-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-
 	</script>
 <!--===============================================================================================-->
 
@@ -123,4 +116,19 @@
             });
         @endif
     });
+</script>
+
+<script>
+     function updateCartItemCount() {
+        $.ajax({
+            url: '/cart-item-count',
+            method: 'GET',
+            success: function(response) {
+                $('.js-show-cart').attr('data-notify', response.count);
+            },
+            error: function() {
+                console.error('Failed to fetch cart item count.');
+            }
+        });
+    }
 </script>

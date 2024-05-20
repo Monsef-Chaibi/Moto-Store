@@ -130,7 +130,7 @@ class AuthController extends Controller
                 return redirect('/');  // Redirect to homepage
             }
         } catch (Exception $e) {
-            session()->flash('error', 'There was a problem logging in with Google.');
+            session()->flash('error', 'There was a problem logging in with Google :' . $e->getMessage());
             return redirect('login')->withErrors(['error' => $e->getMessage()]);
         }
     }
