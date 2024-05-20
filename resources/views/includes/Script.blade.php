@@ -263,6 +263,8 @@ function removeProductFromCart(productId) {
                 });
                 updateCartItemCount();
                 fetchCartItems();
+                fetchCartItemsCheck();
+                calculateTotal();
             } else {
                 // Failed to remove product
                 iziToast.error({

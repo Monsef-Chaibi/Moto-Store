@@ -216,6 +216,7 @@
     [ +/- num product ]*/
     $(document).ready(function(){
         $('.btn-num-product-down').on('click', function(){
+            console.log('-');
             var numProduct = Number($(this).next().val());
             if(numProduct > 1) {
                 $(this).next().val(numProduct - 1);
@@ -223,6 +224,7 @@
         });
 
         $('.btn-num-product-up').on('click', function(){
+            console.log('+');
             var numProduct = Number($(this).prev().val());
             var maxProduct = Number($(this).prev().data('max'));
             if(numProduct < maxProduct) {

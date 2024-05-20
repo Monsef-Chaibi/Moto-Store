@@ -19,13 +19,11 @@
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						Free shipping for standard order over 1000 MAD
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
-						</a>
+
                         @if(auth()->user() && auth()->user()->is_admin)
                             <a href="{{ route('Dash') }}"  class="flex-c-m trans-04 p-lr-25">
                                 Admin Dashboard
@@ -45,13 +43,7 @@
                         @endauth
 
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a>
 					</div>
 				</div>
 			</div>
@@ -93,9 +85,7 @@
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
+
 					</div>
 				</nav>
 			</div>
@@ -143,9 +133,7 @@
 
 				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							Help & FAQs
-						</a>
+
                         @if(auth()->user() && auth()->user()->is_admin)
                             <a href="{{ route('Dash') }}"  class="flex-c-m p-lr-10 trans-04">
                                 Admin Dashboard
@@ -164,13 +152,7 @@
                             </a>
                         @endauth
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
-						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
-						</a>
 					</div>
 				</li>
 			</ul>

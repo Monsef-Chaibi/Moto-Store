@@ -52,3 +52,13 @@ Route::get('/cart-items', [CartController::class, 'getCartItems']);
 Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
 Route::get('/Check-Out', [FrontEnd::class, 'CheckOut']);
+
+Route::get('/fetch-cart-items', [FrontEnd::class,'fetchCartItems'])->name('cart.fetch');
+
+Route::post('/CheckoutPaid', [FrontEnd::class, 'handleCheckout'])->name('CheckoutPaid');
+
+// Route for successful payment
+Route::get('/checkout/success', [FrontEnd::class, 'checkoutSuccess'])->name('checkout.success');
+
+// Route for cancelled payment
+Route::get('/checkout/cancel', [FrontEnd::class, 'checkoutCancel'])->name('checkout.cancel');
