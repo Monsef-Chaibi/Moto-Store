@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -124,9 +126,36 @@ class FrontEnd extends Controller
 
     public function checkoutSuccess(Request $request)
     {
-            Cart::where('user_id', Auth::id())->delete();
-            session()->flash('success', 'Payment successful! Your order has been placed.');
-            return redirect('/')->with('success', 'Payment successful! Your order has been placed.');
+        $user = Auth::user();
+        $cartItems = Cart::where('user_id', $user->id)->get();
+
+        if ($cartItems->isEmpty()) {
+            return redirect('/')->with('error', 'Cart is empty!');
+        }
+
+        $totalPrice = $cartItems->sum(function ($cartItem) {
+            return $cartItem->product->price * $cartItem->quantity;
+        });
+
+        $order = Order::create([
+            'user_id' => $user->id,
+            'total_price' => $totalPrice,
+            'status' => 'pending'
+        ]);
+
+        foreach ($cartItems as $cartItem) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $cartItem->product_id,
+                'quantity' => $cartItem->quantity,
+                'price' => $cartItem->product->price
+            ]);
+        }
+
+        Cart::where('user_id', $user->id)->delete();
+
+        session()->flash('success', 'Payment successful! Your order has been placed.');
+        return redirect('/')->with('success', 'Payment successful! Your order has been placed.');
     }
 
     public function checkoutCancel(Request $request)

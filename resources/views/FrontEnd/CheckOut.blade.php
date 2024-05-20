@@ -74,11 +74,11 @@
                                 <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
                                     <div class="p-t-15">
                                         <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email" value="{{ Auth::user()->email }}" readonly>
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email" value="{{ Auth::user()->email }}" >
                                         </div>
 
                                         <div class="bor8 bg0 m-b-22">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" value="{{ Auth::user()->name }}" readonly>
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" value="{{ Auth::user()->name }}" >
                                         </div>
                                     </div>
                                 </div>
