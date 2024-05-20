@@ -68,5 +68,9 @@ class FrontEnd extends Controller
         return response()->json(['loggedIn' => Auth::check()]);
     }
 
+    public function CheckOut()
+    {
+        return view('FrontEnd.CheckOut');
+    }
 
 }

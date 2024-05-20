@@ -48,3 +48,7 @@ Route::post('/add-to-cart', [CartController::class, 'addToCart']);
 Route::get('/cart-item-count', [CartController::class, 'getCartItemCount']);
 
 Route::get('/cart-items', [CartController::class, 'getCartItems']);
+
+Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+Route::get('/Check-Out', [FrontEnd::class, 'CheckOut']);

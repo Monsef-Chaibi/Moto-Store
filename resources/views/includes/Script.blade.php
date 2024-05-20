@@ -132,3 +132,163 @@
         });
     }
 </script>
+
+<script>
+    $(document).ready(function(){
+        updateCartItemCount();
+        fetchCartItems();
+     // Add to cart with AJAX
+     $('.js-addcart-detail').on('click', function(){
+        var quantity = $(this).closest('.size-204').find('.num-product').val();
+        var productId = $('#product-id').val();
+
+        // Check if user is logged in
+        $.ajax({
+            url: '/check-login', // Endpoint to check login status
+            method: 'GET',
+            success: function(response) {
+                if(response.loggedIn) {
+                    // User is logged in, add to cart
+                    $.ajax({
+                        url: '/add-to-cart', // Endpoint to add product to cart
+                        method: 'POST',
+                        data: {
+                            product_id: productId,
+                            quantity: quantity,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(data) {
+                            if (data.success) {
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: data.message,
+                                    position: 'topRight'
+                                });
+                                updateCartItemCount();
+                                fetchCartItems();
+                            } else {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: data.message,
+                                    position: 'topRight'
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'Failed to add product to cart.',
+                                position: 'topRight'
+                            });
+                        }
+                    });
+                } else {
+                    // User is not logged in, show login prompt
+                    iziToast.warning({
+                        title: 'Warning',
+                        message: 'Please log in to add products to your cart.',
+                        position: 'topRight'
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Failed to check login status.',
+                    position: 'topRight'
+                });
+            }
+        });
+    });
+
+function fetchCartItems() {
+    $.ajax({
+        url: '/cart-items',
+        method: 'GET',
+        success: function(response) {
+            var cartItems = response.cartItems;
+            var cartContent = $('.header-cart-wrapitem');
+            cartContent.empty(); // Clear existing cart items
+            var total = 0;
+
+            // Populate cart content with fetched cart items
+            cartItems.forEach(function(item) {
+                var product = item.product;
+                var itemHtml = `
+                <li class="header-cart-item flex-w flex-t m-b-12">
+                    <div class="header-cart-item-img">
+                        <img src="{{ asset('storage') }}/${product.image}" alt="Product Image">
+                    </div>
+                    <div class="header-cart-item-txt p-t-8">
+                        <a href="/Product-Details/${product.id}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">${product.name}</a>
+                        <span class="header-cart-item-info">${item.quantity} x ${product.price} MAD</span>
+                    </div>
+                    <div class="header-cart-item-remove ml-auto">
+                        <button class="btn-remove-from-cart" data-product-id="${product.id}">Supprimer</button>
+                    </div>
+                </li>
+                `;
+                cartContent.append(itemHtml);
+                total += (product.price * item.quantity);
+            });
+
+            // Update total cart price
+            $('.header-cart-total').text('Total: ' + total.toFixed(2)+ ' MAD');
+        },
+        error: function() {
+            console.error('Failed to fetch cart items.');
+        }
+    });
+}
+
+
+// Function to remove product from cart
+function removeProductFromCart(productId) {
+    $.ajax({
+        url: '/remove-from-cart', // Endpoint to remove product from cart
+        method: 'POST',
+        data: {
+            product_id: productId,
+            _token: '{{ csrf_token() }}'
+        },
+        success: function(response) {
+            if (response.success) {
+                // Product removed successfully
+                // Reload or update the cart content as needed
+                fetchCartItems(); // Example function to fetch and update cart items
+                iziToast.success({
+                    title: 'Success',
+                    message: response.message,
+                    position: 'topRight'
+                });
+                updateCartItemCount();
+                fetchCartItems();
+            } else {
+                // Failed to remove product
+                iziToast.error({
+                    title: 'Error',
+                    message: response.message,
+                    position: 'topRight'
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            // Error handling
+            iziToast.error({
+                title: 'Error',
+                message: 'Failed to remove product from cart.',
+                position: 'topRight'
+            });
+        }
+    });
+}
+
+// Event delegation to handle click event for dynamically added buttons
+$('.header-cart-wrapitem').on('click', '.btn-remove-from-cart', function() {
+    var productId = $(this).data('product-id');
+    // Call the function to remove the product from the cart
+    removeProductFromCart(productId);
+});
+
+});
+</script>

@@ -230,7 +230,7 @@
             }
         });
     });
- 
+
 
     /*==================================================================
     [ Rating ]*/
@@ -295,6 +295,9 @@
 
                 // Set image source dynamically
                 modal.find('#modal-product-image').attr('src', productImage);
+                $('#product-id').val(product.id);
+                var maxQuantity = product.quantity; // Assuming product.quantity contains the maximum quantity
+                $('.inpt').attr('data-max', maxQuantity);
             });
         // Show modal
         modal.addClass('show-modal1');
