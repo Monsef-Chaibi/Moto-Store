@@ -15,12 +15,12 @@
             message: '{{ session('error') }}',
             position: 'topRight'
         });
-        
+
     @endif
 </script>
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-      <a href="index.html" class="app-brand-link">
+      <a href="/admin/Dash" class="app-brand-link">
         <span class="app-brand-logo demo">
           <svg
             width="25"
@@ -76,7 +76,7 @@
             </g>
           </svg>
         </span>
-        <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+        <span class="app-brand-text demo menu-text fw-bolder ms-2">Home</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -117,6 +117,12 @@
                 </a>
             </li>
         </ul>
+    </li>
+    <li class="menu-item {{ request()->routeIs('OrderDash') ? 'active' : '' }}">
+        <a href="{{ route('OrderDash') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-collection"></i>
+            <div data-i18n="Analytics">Order</div>
+        </a>
     </li>
     </ul>
   </aside>

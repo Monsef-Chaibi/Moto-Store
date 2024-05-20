@@ -21,4 +21,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/api/products/{id}', [ProductController::class, 'show']);
     Route::post('/products/{id}', [ProductController::class, 'update']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+    Route::get('/Order-Dash', [AdminController::class, 'OrderDash'])->name('OrderDash');
+
 });
+
+Route::post('/order/{order}/confirm', [AdminController::class, 'confirmOrder'])->name('order.confirm');
